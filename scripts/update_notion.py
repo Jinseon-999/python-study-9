@@ -33,7 +33,9 @@ def changed_python_files():
     return sorted({
         path.strip()
         for path in result.stdout.splitlines()
-        if path.strip().endswith(".py") and Path(path.strip()).is_file()
+        if path.strip().endswith(".py")
+        and path.strip() != "scripts/update_notion.py"
+        and Path(path.strip()).is_file()
     })
 
 
