@@ -191,15 +191,15 @@ def append_blocks(token, page_id, blocks):
 
 
 def main():
+    commit_sha = os.getenv("GITHUB_SHA", "unknown")
+    files = changed_python_files()
+    if not files:
+        print("이번 push에는 학습용 Python 파일 변경이 없습니다. Notion 업데이트를 건너뜁니다.")
+        return
+
     openai_key = required_env("OPENAI_API_KEY")
     notion_token = required_env("NOTION_TOKEN")
     page_id = required_env("NOTION_PAGE_ID")
-    commit_sha = os.getenv("GITHUB_SHA", "unknown")
-
-    files = changed_python_files()
-    if not files:
-        print("이번 push에는 변경된 Python 파일이 없습니다. Notion 업데이트를 건너뜁니다.")
-        return
 
     if commit_already_added(notion_token, page_id, commit_sha):
         print(f"커밋 {commit_sha}은 이미 Notion에 반영되어 있어 중복 추가하지 않습니다.")
