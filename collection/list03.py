@@ -31,8 +31,8 @@ print("최소값", smallest)
 largest = a[0]
 for v in a:
     if v >= largest:
-        smallest = v
-print("최대값", smallest)
+        larest = v
+print("최대값", largest)
 
 # 함수 min max sum
 print(min(a), max(a), sum(a))
